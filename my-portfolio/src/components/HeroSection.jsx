@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import profilePic from "../assets/image.jpg"; // Ensure the correct path
+import profilePic from "../assets/Image.jpg"; // Ensure the correct path
 
 const techStacks = [
   { name: "JavaScript", icon: "https://img.icons8.com/color/48/javascript.png" },
