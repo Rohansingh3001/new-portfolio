@@ -20,14 +20,15 @@ const scrollVariants = {
     x: ["100%", "-100%"],
     transition: {
       x: {
-        repeat: Infinity,
+        repeat: Infinity, // Infinite loop
         repeatType: "loop",
-        duration: 15, // Adjust speed
+        duration: 15, // Adjust speed as needed
         ease: "linear",
       },
     },
   },
 };
+
 
 const TechStack = () => {
   return (

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-scroll": "^1.9.3",
+    "sticky": "^0.8.0"
+  }
+}

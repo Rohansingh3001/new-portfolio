@@ -35,69 +35,66 @@ const Projects = () => {
   const [activeProject, setActiveProject] = useState(null);
 
   return (
-    <div id="projects" className="min-h-screen bg-gray-100 py-12">
-      <h2 className="text-4xl font-bold text-center mb-10">My Projects</h2>
+    <div id="projects" className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-12">
+      <h2 className="text-4xl font-bold text-center text-white mb-10">My Projects</h2>
 
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.3 } },
-        }}
-      >
-        {projects.map((project) => (
-          <motion.div
-            key={project.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden relative cursor-pointer"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            onClick={() =>
-              setActiveProject(activeProject === project.id ? null : project.id)
-            }
-          >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-48 object-cover transition-transform duration-300 transform hover:scale-105"
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold text-center">{project.title}</h3>
-            </div>
+      <div className="relative container mx-auto">
+        <div className="grid gap-24"> {/* Increased spacing for better visibility */}
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              className="sticky top-10 w-full max-w-lg mx-auto bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative cursor-pointer transition-all duration-300"
+              style={{ top: `${index * 120}px` }} // Adjusted progressive sticky effect
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+              viewport={{ once: true }}
+              onClick={() =>
+                setActiveProject(activeProject === project.id ? null : project.id)
+              }
+            >
+              <motion.img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-56 object-cover rounded-t-2xl"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              />
+              <div className="p-5 text-center">
+                <h3 className="text-2xl font-semibold text-white">{project.title}</h3>
+              </div>
 
-            {/* Links Section - Appears when clicked */}
-            {activeProject === project.id && (
-              <motion.div
-                className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center space-y-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-white hover:text-gray-300"
+              {/* Animated Overlay - Appears when clicked */}
+              {activeProject === project.id && (
+                <motion.div
+                  className="absolute inset-0 bg-black/90 flex flex-col items-center justify-center space-y-4 rounded-2xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <FaGithub size={24} /> GitHub
-                </a>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-blue-400 hover:text-blue-600"
-                >
-                  <FaExternalLinkAlt size={24} /> Live Demo
-                </a>
-              </motion.div>
-            )}
-          </motion.div>
-        ))}
-      </motion.div>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-white hover:text-gray-300"
+                  >
+                    <FaGithub size={24} /> GitHub
+                  </a>
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-blue-400 hover:text-blue-600"
+                  >
+                    <FaExternalLinkAlt size={24} /> Live Demo
+                  </a>
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

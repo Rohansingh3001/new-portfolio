@@ -13,18 +13,20 @@ const HeroSection = () => {
   return (
     <motion.div
       id="home"
-      className="h-screen flex flex-col-reverse lg:flex-row items-center justify-center px-8 bg-gradient-to-r from-blue-500 to-indigo-600 text-white"
+      className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-6 sm:px-12 py-10 bg-gradient-to-r from-gray-900 to-black text-white relative space-y-10 lg:space-y-0 pt-24"
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
     >
       {/* Left Side - Text Content */}
-      <div className="text-center lg:text-left lg:w-1/2 space-y-4">
-        <h1 className="text-5xl lg:text-6xl font-bold">Hi, I'm Rohan Singh</h1>
-        <p className="text-lg lg:text-2xl mt-2">Web Developer & ML Enthusiast</p>
+      <div className="text-center lg:text-left lg:w-1/2 space-y-6">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold">Hi, I'm Rohan Singh</h1>
+        <p className="text-lg sm:text-xl lg:text-2xl mt-2 text-gray-300">
+          Web Developer & ML Enthusiast
+        </p>
 
-        {/* Flashing Tech Stack Icons */}
-        <div className="flex space-x-4 mt-4">
+        {/* Tech Stack Icons with Grid Layout for Mobile */}
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 mt-6 place-items-center">
           {techStacks.map((tech, index) => (
             <motion.img
               key={index}
@@ -43,29 +45,57 @@ const HeroSection = () => {
           ))}
         </div>
 
-        <div className="mt-6">
+        {/* Buttons Section */}
+        <div className="mt-6 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+          <a
+            href="#projects"
+            className="px-6 py-3 bg-gray-800 text-white rounded-lg font-semibold text-lg hover:bg-gray-700 hover:scale-105 transition transform duration-300 shadow-md"
+          >
+            Let's See My Projects
+          </a>
           <a
             href="#contact"
-            className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold text-lg hover:bg-gray-200 transition"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold text-lg hover:bg-blue-500 hover:scale-105 transition transform duration-300 shadow-md"
           >
-            Contact Me
+            Let's Connect
           </a>
         </div>
       </div>
 
-      {/* Right Side - Image with Motion */}
+      {/* Right Side - Image with Motion & Circular Waves */}
       <motion.div
-        className="lg:w-1/2 flex justify-center"
+        className="lg:w-1/2 flex flex-col items-center relative mt-24 lg:mt-0"
         initial={{ opacity: 0, scale: 0.8, y: 50 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
+        {/* Circular Wave Animation */}
+        <motion.div
+          className="absolute w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 rounded-full border-2 border-blue-400 animate-pulse"
+          initial={{ scale: 1 }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        ></motion.div>
+
+        {/* Profile Image */}
         <img
-          src={profilePic} // Local image import
+          src={profilePic}
           alt="Rohan Singh"
-          className="w-64 lg:w-80 h-64 lg:h-80 rounded-full border-4 border-white shadow-lg"
+          className="w-48 sm:w-64 lg:w-80 h-48 sm:h-64 lg:h-80 rounded-full border-4 border-gray-300 shadow-lg relative"
         />
+
+        {/* Open to Work Section (Below Image) */}
+        <motion.div
+          className="mt-6 text-center text-lg font-semibold text-gray-300 px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 1 }}
+        >
+          <p className="bg-gray-800 px-4 py-2 rounded-lg shadow-md">
+            🚀 Open to Work – Let’s Chat About Your Next Project!
+          </p>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

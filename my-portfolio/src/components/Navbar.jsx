@@ -1,36 +1,48 @@
-import { Link } from "react-scroll";
 import { useState, useEffect } from "react";
+import { Link, Events, scrollSpy } from "react-scroll";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolling(window.scrollY > 50); // Change background when scrolled
+      setScrolling(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Initialize scrollSpy to detect the active section
+    Events.scrollEvent.register("begin", () => {});
+    Events.scrollEvent.register("end", () => {});
+    scrollSpy.update();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      Events.scrollEvent.remove("begin");
+      Events.scrollEvent.remove("end");
+    };
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full transition-all duration-300 z-50 p-4 flex justify-center space-x-6 ${
-        scrolling ? "bg-white shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed top-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-full flex space-x-8 transition-all duration-300 z-50 
+      ${scrolling ? "bg-white/20 backdrop-blur-md shadow-lg" : "bg-white/10 backdrop-blur-xl"} border border-white/30`}
     >
-      {["home", "about", "projects"].map((section) => (
+      {["home", "about", "projects", "contact"].map((section) => (
         <Link
           key={section}
           to={section}
           smooth={true}
           duration={500}
-          className="cursor-pointer font-medium text-lg relative group text-gray-800"
+          spy={true}
+          offset={-70} // Adjust offset to match section height
+          activeClass="text-blue-500 font-semibold"
+          className="cursor-pointer text-lg font-medium relative group text-white transition-all"
         >
           {section.charAt(0).toUpperCase() + section.slice(1)}
 
-          {/* Hover & Active Underline Effect */}
-          <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-600 transition-all group-hover:w-full"></span>
+          {/* Underline effect for active and hover state */}
+          <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-500 transition-all group-hover:w-full"></span>
         </Link>
       ))}
     </nav>
