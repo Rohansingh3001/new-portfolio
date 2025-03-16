@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
+
 // Import images from src/assets
 import ecojunkImage from "../assets/ecojunk.png";
 import farmerGoodsImage from "../assets/farmergoods.png";
@@ -33,6 +34,7 @@ const projects = [
 
 const Projects = () => {
   const [activeProject, setActiveProject] = useState(null);
+  
 
   return (
     <div id="projects" className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-12">
@@ -94,7 +96,25 @@ const Projects = () => {
             </motion.div>
           ))}
         </div>
-      </div>
+
+        {/* See More Projects Button */}
+{/* See More Projects Button */}
+<div className="flex justify-center mt-12">
+  <motion.button
+    onClick={() => window.open("https://github.com/Rohansingh3001", "_blank")}
+    className="px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full shadow-lg backdrop-blur-lg transition-all duration-300"
+    whileHover={{
+      scale: 1.1,
+      boxShadow: "0px 0px 12px rgba(59,130,246,0.7)",
+    }}
+    whileTap={{ scale: 0.9 }}
+  >
+    See More Projects →
+  </motion.button>
+</div>
+
+
+      </div>      
     </div>
   );
 };
