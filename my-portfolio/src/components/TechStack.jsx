@@ -15,20 +15,34 @@ const techStack = [
 ];
 
 // Scrolling animation settings
-const scrollVariants = {
+const scrollVariantsForward = {
   animate: {
-    x: ["100%", "-100%"],
+    x: ["-100%", "0%"],
     transition: {
       x: {
-        repeat: Infinity, // Infinite loop
+        repeat: Infinity,
         repeatType: "loop",
-        duration: 15, // Adjust speed as needed
+        duration: 15, // Adjust speed
         ease: "linear",
       },
     },
   },
 };
 
+// Backward Scrolling (right to left)
+const scrollVariantsBackward = {
+  animate: {
+    x: ["0%", "-100%"],
+    transition: {
+      x: {
+        repeat: Infinity,
+        repeatType: "loop",
+        duration: 15, // Adjust speed
+        ease: "linear",
+      },
+    },
+  },
+};
 
 const TechStack = () => {
   return (
@@ -38,18 +52,45 @@ const TechStack = () => {
         Technologies & Tools
       </h2>
 
-      {/* Scrolling container */}
+      {/* First Scrolling Row - Forward */}
       <div className="relative flex items-center w-full overflow-hidden">
         <motion.div
           className="flex space-x-10 w-max"
-          variants={scrollVariants}
+          variants={scrollVariantsForward}
           animate="animate"
         >
-          {techStack.map((tech, index) => (
+          {[...techStack, ...techStack].map((tech, index) => (
             <motion.div
-              key={index}
+              key={`forward-${index}`}
               className="w-32 h-40 flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-4 transform hover:scale-110 transition duration-300 border border-gray-700 hover:border-blue-500"
-              whileHover={{ scale: 1.15, boxShadow: "0px 0px 15px rgba(0, 170, 255, 0.8)" }}
+              whileHover={{
+                scale: 1.15,
+                boxShadow: "0px 0px 15px rgba(0, 170, 255, 0.8)",
+              }}
+              animate={{ y: [0, -5, 0], transition: { duration: 3, repeat: Infinity } }}
+            >
+              <img src={tech.icon} alt={tech.name} className="w-16 h-16 drop-shadow-lg" />
+              <p className="text-white mt-3 text-sm font-semibold">{tech.name}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Second Scrolling Row - Backward */}
+      <div className="relative flex items-center w-full overflow-hidden mt-5">
+        <motion.div
+          className="flex space-x-10 w-max"
+          variants={scrollVariantsBackward}
+          animate="animate"
+        >
+          {[...techStack, ...techStack].map((tech, index) => (
+            <motion.div
+              key={`backward-${index}`}
+              className="w-32 h-40 flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-4 transform hover:scale-110 transition duration-300 border border-gray-700 hover:border-blue-500"
+              whileHover={{
+                scale: 1.15,
+                boxShadow: "0px 0px 15px rgba(0, 170, 255, 0.8)",
+              }}
               animate={{ y: [0, -5, 0], transition: { duration: 3, repeat: Infinity } }}
             >
               <img src={tech.icon} alt={tech.name} className="w-16 h-16 drop-shadow-lg" />
