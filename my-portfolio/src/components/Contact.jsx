@@ -16,9 +16,9 @@ const Contact = () => {
           <div className="text-white/40">&copy; 2025. All rights reserved.</div>
           <nav className="flex flex-col md:flex-row gap-8 items-center">
             {[
-              { href: "https://www.instagram.com/rohan_singh", icon: <FaInstagram size={30} /> },
-              { href: "https://www.linkedin.com/in/rohan-singh", icon: <FaLinkedin size={30} /> },
-              { href: "mailto:rohansingh@example.com", icon: <FaEnvelope size={30} /> },
+              { href: "https://www.instagram.com/rohan_30.01/", icon: <FaInstagram size={30} /> },
+              { href: "https://www.linkedin.com/in/rohan-singh-033748243/", icon: <FaLinkedin size={30} /> },
+              { href: "mailto:rsingh300103@gmail.com", icon: <FaEnvelope size={30} /> },
             ].map(({ href, icon }, index) => (
               <a
                 key={index}
